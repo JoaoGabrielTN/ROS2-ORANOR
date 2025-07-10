@@ -16,7 +16,8 @@ RUN apt-get install -y --no-install-recommends \
     lsb-release \
     iproute2 \
     iputils-ping \    
-    net-tools \       
+    net-tools \      
+    traceroute \
     dnsutils \
     nano \
     software-properties-common \
@@ -33,6 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-colcon-common-extensions \
     python3-rosdep \
     ros-${ROS_DISTRO}-turtlesim \
+    ros-${ROS_DISTRO}-rmw-zenoh-cpp \
     ros-${ROS_DISTRO}-vision-opencv \
     ros-${ROS_DISTRO}-demo-nodes-cpp \
     python3-opencv \
