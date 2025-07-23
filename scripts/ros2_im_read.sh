@@ -1,6 +1,7 @@
 docker run --rm -it --security-opt seccomp=unconfined \
     --shm-size=512m \
-    --name ros3 \
+    --name ros2 \
+    --network host \
     -e DISPLAY=$DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
     -e ROS_DOMAIN_ID=42 \

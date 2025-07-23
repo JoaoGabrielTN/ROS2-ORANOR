@@ -6,6 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV ROS_DISTRO=jazzy
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
+ENV RMW_IMPLEMENTATION=rmw_zenoh_cpp
+ENV ZENOH_ROUTER_CONFIG_URI=/ros2_ws/zenoh-config/RMW_ZENOH_ROUTER_CONFIG.json5
 
 # Install base dependencies
 RUN apt-get update
@@ -54,11 +56,10 @@ RUN rosdep init && rosdep update
 RUN mkdir -p /ros2_ws/src
 WORKDIR /ros2_ws
 COPY ./image_subscriber ./src/
+COPY ./zenoh-conf ./zenoh-config
+
+
 # Setup environment
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /etc/bash.bashrc
 
-# Entry point configuration
-#COPY ros_entrypoint.sh /
-#RUN chmod +x /ros_entrypoint.sh
-#ENTRYPOINT ["/ros_entrypoint.sh"]
-#CMD ["bash"]
+
