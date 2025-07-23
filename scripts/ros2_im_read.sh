@@ -1,7 +1,5 @@
 docker run --rm -it --security-opt seccomp=unconfined \
     --shm-size=512m \
-    --net ursim_net \
-    --ip 192.168.56.100 \
     --name ros3 \
     -e DISPLAY=$DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
