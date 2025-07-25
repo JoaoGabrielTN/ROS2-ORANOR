@@ -13,6 +13,7 @@ ENV ZENOH_ROUTER_CONFIG_URI=/ros2_ws/zenoh-config/RMW_ZENOH_ROUTER_CONFIG.json5
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
     curl \
+    git \
     tmux \
     gnupg2 \
     lsb-release \
@@ -31,7 +32,7 @@ RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o 
 
 # Install ROS 2 packages (ros-base for minimal installation)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ros-${ROS_DISTRO}-ros-base \
+    ros-${ROS_DISTRO}-desktop \
     python3-argcomplete \
     python3-colcon-common-extensions \
     python3-rosdep \
@@ -39,6 +40,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-${ROS_DISTRO}-rmw-zenoh-cpp \
     ros-${ROS_DISTRO}-vision-opencv \
     ros-${ROS_DISTRO}-demo-nodes-cpp \
+    ros-${ROS_DISTRO}-ur-robot-driver \
+    ros-${ROS_DISTRO}-ros-gz \
+    ros-${ROS_DISTRO}-gz-ros2-control \
+    ros-${ROS_DISTRO}-ros2-control \
+    ros-${ROS_DISTRO}-ros2-controllers \
     python3-opencv \
     python3-vcstool \
     && rm -rf /var/lib/apt/lists/*
@@ -58,6 +64,7 @@ WORKDIR /ros2_ws
 COPY ./image_subscriber ./src/
 COPY ./zenoh-conf ./zenoh-config
 
+RUN cd src && git clone https://github.com/pla10/ros2_ur5_interface.git
 
 # Setup environment
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /etc/bash.bashrc
